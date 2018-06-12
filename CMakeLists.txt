@@ -45,6 +45,9 @@ include_directories(
 add_executable(TEST2 src/Test2.cpp)
 target_link_libraries(TEST2 ${catkin_LIBRARIES})
 
+add_executable(TEST3 src/TEST3.cpp)
+target_link_libraries(TEST3 ${catkin_LIBRARIES})
+
 
 
 #Controles
