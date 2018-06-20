@@ -42,13 +42,26 @@ include_directories(
 )
 
 #Tests
+add_executable(TEST1 src/Test1.cpp)
+target_link_libraries(TEST1 ${catkin_LIBRARIES})
+
 add_executable(TEST2 src/Test2.cpp)
 target_link_libraries(TEST2 ${catkin_LIBRARIES})
 
-add_executable(TEST3 src/TEST3.cpp)
-target_link_libraries(TEST3 ${catkin_LIBRARIES})
+add_executable(TEST4 src/TEST4.cpp)
+target_link_libraries(TEST4 ${catkin_LIBRARIES})
 
+add_executable(TEST5 src/Test5.cpp)
+target_link_libraries(TEST5 ${catkin_LIBRARIES})
 
+add_executable(TEST6 src/Test6.cpp)
+target_link_libraries(TEST6 ${catkin_LIBRARIES})
+
+add_executable(TEST7 src/Test7.cpp)
+target_link_libraries(TEST7 ${catkin_LIBRARIES})
+
+add_executable(imagen src/imagen.cpp)
+target_link_libraries(imagen ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 
 #Controles
 add_executable(MC src/MC.cpp)
