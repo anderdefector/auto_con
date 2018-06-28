@@ -6,21 +6,25 @@
 #include <image_transport/image_transport.h>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
 #include <std_msgs/Int32.h>
 
 
-
 using namespace std;
 using namespace cv;
+
+
 
 class Edge_Detector
 {
    	ros::NodeHandle nh1_;
   	image_transport::ImageTransport it1_;
   	image_transport::Subscriber image_sub_;
+    std::vector<Point2f> pts_src;
+    std::vector<Point2f> pts_dst;
   		
 public:
 	//Constructor por defecto de la clase con lista de constructores
@@ -29,6 +33,9 @@ public:
     image_sub_ = it1_.subscribe("/camera/rgb/image_raw", 1, &Edge_Detector::imageCb, this);///bebop/image_raw
 	//image_sub_ = it1_.subscribe("/usb_cam/image_raw", 1, &Edge_Detector::imageCb, this);
     }
+
+
+
 
   	void imageCb(const sensor_msgs::ImageConstPtr& msg){
 
@@ -50,9 +57,15 @@ public:
   	void detect_edges(cv::Mat img){
 	
 		cv::Mat src;
+    cv::Mat ipm;
+    cv::Mat h=(Mat_<double>(3,3) << -0.07299048082479265, -1.362945165901279, 350.1929685836804, 
+                                    -3.613163365049551e-16, -1.802864876372371, 485.6129679754262, 
+                                    -1.067224948292441e-18, -0.004166539947081899, 0.9999999999999999);
 		img.copyTo(src);
+    warpPerspective(src, ipm, h, src.size());
 		imshow("Original Image",src);
-		waitKey(0);
+    imshow("IPM",ipm);
+		waitKey(3);
 
 	}	 
 };
